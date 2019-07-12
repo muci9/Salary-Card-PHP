@@ -54,26 +54,33 @@
         $taxesProcessed = [];
         $matches = [];
         foreach ($taxes as $tax) {
-            if ($tax != PHP_EOL) {
-                preg_match("/[0-9]/", $tax, $matches, PREG_OFFSET_CAPTURE);
-                $taxName = substr($tax, 0, $matches[0][1]);
-                $taxPercentage = str_replace(",", ".", substr($tax, $matches[0][1], strlen($tax) - $matches[0][1]));
-                $taxValue = $taxPercentage * $totalBeforeTaxes / 100;
-                array_push($taxesProcessed, [$taxName, $taxPercentage, $taxValue]);
+            if ($tax == PHP_EOL) {
+                continue;
             }
+            preg_match("/(?<taxName>[a-zA-Z]+)(?<taxPercentage>\d+[\.,]\d+)$/", $tax, $matches);
+//            preg_match("/\d/", $tax, $matches, PREG_OFFSET_CAPTURE);
+//            $taxName = substr($tax, 0, $matches[0][1]);
+//            $taxPercentage = str_replace(",", ".", substr($tax, $matches[0][1], strlen($tax) - $matches[0][1]));
+            $matches["taxPercentage"] = str_replace(",", ".", $matches["taxPercentage"]);
+            $taxValue = (float)$matches["taxPercentage"] * $totalBeforeTaxes / 100;
+            array_push($taxesProcessed, [$matches["taxName"], $matches["taxPercentage"], $taxValue]);
+//            $taxValue = $taxPercentage * $totalBeforeTaxes / 100;
+//            array_push($taxesProcessed, [$taxName, $taxPercentage, $taxValue]);
         }
         return $taxesProcessed;
     }
 
     function formatActivitiesOutput(array $activitiesProcessed) : string
     {
-        $output = "";
-        $col1 = str_pad("Cod activitate",17);
-        $col2 = str_pad("Nume activitate", 17, " " , STR_PAD_LEFT);
-        $col3 = str_pad("Ore", 7, " ", STR_PAD_LEFT);
-        $col4 = str_pad("Rata orara", 10, " ", STR_PAD_LEFT);
-        $col5 = str_pad("Suma primita", 13, " ", STR_PAD_LEFT);
-        $output .= $col1."|".$col2."|".$col3."|".$col4."|".$col5.PHP_EOL;
+        $output = sprintf(
+            '%s|%s|%s|%s|%s',
+            str_pad("Cod activitate",17),
+            str_pad("Nume activitate", 17, " " , STR_PAD_LEFT),
+            str_pad("Ore", 7, " ", STR_PAD_LEFT),
+            str_pad("Rata orara", 10, " ", STR_PAD_LEFT),
+            str_pad("Suma primita", 13, " ", STR_PAD_LEFT)
+        );
+        $output .= PHP_EOL;
         foreach ($activitiesProcessed as $activityInfo) {
             $col1 = str_pad($activityInfo[0],17);
             $col2 = str_pad($activityInfo[1], 17, " ", STR_PAD_LEFT);
@@ -203,10 +210,13 @@
     }
 
     $handle = fopen("teste", "r");
-    if ($handle) {
-        while (($line = fgets($handle)) !== false) {
-            //$line = readline("Insert line:");
-            processSalaryString($line);
-        }
+    if (!$handle) {
+        echo("Couldn't open file.").PHP_EOL;
+        die;
+    }
+
+    while (($line = fgets($handle)) !== false) {
+        //$line = readline("Insert line:");
+        processSalaryString($line);
     }
     fclose($handle);

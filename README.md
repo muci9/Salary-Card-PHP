@@ -11,25 +11,25 @@ ana+maria|stanciu|2900312123321|\[usoare_2;cules_struguri;120h30m\*10.14/h\],\[u
 
 
 Se cere sa scrieti un script PHP care sa primeasca la input un string cu formatul exemplificat mai sus si sa scrie la output formatul de fluturas exemplificat mai jos:
+<pre>
+Nume            |STANCIU Ana Maria  
+CNP             |2900312123321  
+  
+Cod activitate  |Nume activitate    |Ore   |Rata orara|Suma primita  
+usoare_1        |curatit butuci     |  30,0| 10,50 RON|  315,00 RON  
+usoare_2        |cules struguri     | 120,5| 10,14 RON| 1221,87 RON  
+-------------------------------------------------------------------  
+TOTAL BRUT                                              1536,87 RON  
 
-Nume            |STANCIU Ana Maria
-CNP             |2900312123321
-
-Cod activitate  |Nume activitate    |Ore   |Rata orara|Suma primita
-usoare_1        |curatit butuci     |  30,0| 10,50 RON|  315,00 RON
-usoare_2        |cules struguri     | 120,5| 10,14 RON| 1221,87 RON
-\-------------------------------------------------------------------
-TOTAL BRUT                                              1536,87 RON
-
-Contributii
-\-------------------------------------------------------------------
-CASS                                              5,2%|   79,92 RON
-SOMAJ                                             0,5%|    7,68 RON
-CAS                                              15,8%|  242,82 RON
-\-------------------------------------------------------------------
-
+Contributii  
+-------------------------------------------------------------------  
+CASS                                              5,2%|   79,92 RON  
+SOMAJ                                             0,5%|    7,68 RON  
+CAS                                              15,8%|  242,82 RON  
+-------------------------------------------------------------------  
+  
 TOTAL                                                    1206,45 RON          
 
-
-EXTRA:
+</pre>
+EXTRA:  
 	String-urile sunt introduse dintr-un fisier hard-coded numit 'teste'.

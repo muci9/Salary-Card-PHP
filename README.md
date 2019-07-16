@@ -32,4 +32,4 @@ TOTAL                                                    1206,45 RON
 
 </pre>
 EXTRA:  
-	String-urile sunt introduse dintr-un fisier hard-coded numit 'teste'.
+	String-urile sunt introduse dintr-un fisier hard-coded numit 'exempleInput'.

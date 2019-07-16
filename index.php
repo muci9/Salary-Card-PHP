@@ -209,7 +209,7 @@
         displaySalaryCard($firstName, $lastName, $cnp, $activitiesProcessed, $totalBrut, $taxesProcessed, $totalAfterTaxes);
     }
 
-    $handle = fopen("teste", "r");
+    $handle = fopen("exempleInput", "r");
     if (!$handle) {
         echo("Couldn't open file.").PHP_EOL;
         die;
